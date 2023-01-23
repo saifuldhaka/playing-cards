@@ -7,6 +7,9 @@ use Response;
 
 class CardController extends Controller
 {
+    // define cards
+    public  $shapes = array('S', 'H', 'D', 'C');
+    public $numbers = array('A', '2', '3', '4', '5', '6', '7', '8', '9', 'X', 'J', 'Q', 'K');
     /**
      * Display a listing of the resource.
      *
@@ -45,16 +48,16 @@ class CardController extends Controller
             'no_people.requried' => 'Input value does not exist or value is invalid'
         ]);
 
-        $shapes = array('S', 'H', 'D', 'C');
-        $numbers = array('A', '2', '3', '4', '5', '6', '7', '8', '9', 'X', 'J', 'Q', 'K');
-        $cards = array();
 
-        foreach($shapes as $shape) {
-            foreach($numbers as $number) {
-                $cards[] = $shape."-".$number;
+        // Card Nomenclature
+        $cards = array();
+        foreach($this->shapes as $shape) {
+            foreach($this->numbers as $number) {
+                $cards[] = "<span class='cards'>".$shape.$number."</span>";
             }
         }
 
+        // Shuffle the Cards
         $collection = collect($cards);
         $shuffled = $collection->shuffle();
         $shuffled->all();
@@ -63,22 +66,20 @@ class CardController extends Controller
         $cards_per_person = floor(count($shuffled) / $no_people);
         if ($cards_per_person < 1)
             $cards_per_person = 1;
-        $shuffled_sets = [];
 
+        // Distribute the Cards to n-peopnel
+        $shuffled_sets = [];
         for($i = 0; $i < $no_people; $i++) {
           $temp_shuffleds = [];
-            // $cards .= 'Person #'.($i + 1).' => ';
             for($j = $i * $cards_per_person; $j < ($i + 1) * $cards_per_person; $j++) {
                 if ($j < 52) {
                     array_push($temp_shuffleds,$shuffled[$j]);
                     unset($shuffled[$j]);
                 }
             }
-            // $cards .= '<br/>';
             array_push($shuffled_sets, $temp_shuffleds);
         }
 
-        // dd($shuffled_sets);
         return view('card.index', compact('no_people', 'shuffled_sets'));
     }
 
