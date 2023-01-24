@@ -27,3 +27,5 @@ PHP Laravel 8.0
 
 
 <p align="center"><img src="https://raw.githubusercontent.com/saifuldhaka/playing-cards/main/public/images/1.png" width="400"></p>
+<p align="center"><img src="https://raw.githubusercontent.com/saifuldhaka/playing-cards/main/public/images/2.png" width="400"></p>
+<p align="center"><img src="https://raw.githubusercontent.com/saifuldhaka/playing-cards/main/public/images/3.png" width="400"></p>
