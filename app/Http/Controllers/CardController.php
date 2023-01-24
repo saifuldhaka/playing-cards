@@ -53,7 +53,7 @@ class CardController extends Controller
         $cards = array();
         foreach($this->shapes as $shape) {
             foreach($this->numbers as $number) {
-                $cards[] = "<span class='cards'>".$shape.$number."</span>";
+                $cards[] = $shape.$number;
             }
         }
 
